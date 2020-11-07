@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import FiltersForm from "../FiltersForm/FiltersForm";
-import ListItems from "../ListItems/ListItems";
+import TableListItems from "../TableListItems/TableListItems";
 import Spinner from "../Spinner/Spinner";
 
 import { useContacts } from "../../hooks/useContacts";
@@ -10,7 +10,18 @@ import "./Contacts.css";
 
 const Contacts = () => {
   const { status, data } = useContacts();
-  console.log("render");
+
+  console.log(status);
+
+  const handleFetchingStatus = (status: string | any) => {
+    const matchStatus: any = {
+      pending: () => <Spinner />,
+      failed: () => <p>Error has gone </p>,
+      idle: () => null,
+    };
+
+    return matchStatus[status] ? matchStatus[status]() : null;
+  };
 
   return (
     <section className="contacts">
@@ -18,10 +29,9 @@ const Contacts = () => {
       <main>
         <FiltersForm />
 
-        {status === "pending" && <Spinner />}
-        {status === "failed" && <p>Error has gone </p>}
+        {handleFetchingStatus(status)}
 
-        <ListItems items={data} />
+        <TableListItems items={data} />
       </main>
       <footer>Footer</footer>
     </section>

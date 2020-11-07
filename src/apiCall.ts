@@ -1,9 +1,7 @@
 class Api {
-  constructor() {
-    this.baseUrl = "https://randomuser.me/api";
-  }
+  private baseUrl: string = "https://randomuser.me/api";
 
-  async get(url) {
+  async get(url: string) {
     try {
       const response = await fetch(this.baseUrl + url);
       return response.json();
