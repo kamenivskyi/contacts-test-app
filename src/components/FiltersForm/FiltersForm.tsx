@@ -14,10 +14,10 @@ const FiltersForm = (props: Props) => {
       </div>
       <div className="col s7">
         <div className="row">
-          <select className="browser-default col s3">
-            <option value="" disabled selected>
+          <select className="browser-default col s3" defaultValue="Gender">
+            {/* <option defaultValue='Gender' selected disabled>
               Gender
-            </option>
+            </option> */}
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>

@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FiltersForm from "../FiltersForm/FiltersForm";
+import ListItems from "../ListItems/ListItems";
+import { IItem } from "../../interfaces";
 
 import "./Contacts.css";
 
 interface Props {}
 
 const Contacts = (props: Props) => {
+  const [contacts, setContacts] = useState<Array<IItem>>([]);
+
+  useEffect(() => {
+    fetch("https://randomuser.me/api/?results=200")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setContacts(res.results);
+      });
+  }, []);
+
   return (
     <section className="contacts">
       <header>
@@ -34,6 +47,7 @@ const Contacts = (props: Props) => {
       </header>
       <main>
         <FiltersForm />
+        <ListItems items={contacts} />
       </main>
       <footer>Footer</footer>
     </section>
