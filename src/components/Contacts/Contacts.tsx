@@ -7,14 +7,24 @@ import { IItem } from "../../interfaces";
 import { api } from "../../apiCall";
 
 import "./Contacts.css";
+import Spinner from "../Spinner/Spinner";
 
 const Contacts = () => {
   const [contacts, setContacts] = useState<IItem[]>([]);
+  const [status, setStatus] = useState("idle");
 
   useEffect(() => {
-    api.get("/?results=200").then((res) => {
-      setContacts(res.results);
-    });
+    setStatus("pending");
+
+    api
+      .get("/?results=200")
+      .then((res) => {
+        setContacts(res.results);
+        setStatus("success");
+      })
+      .catch((err) => {
+        setStatus("failed");
+      });
   }, []);
 
   return (
@@ -22,6 +32,10 @@ const Contacts = () => {
       <Header />
       <main>
         <FiltersForm />
+
+        {status === "pending" && <Spinner />}
+        {status === "failed" && <p>Error has gone </p>}
+
         <ListItems items={contacts} />
       </main>
       <footer>Footer</footer>

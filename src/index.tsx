@@ -5,7 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 
 import "materialize-css/dist/css/materialize.min.css";
 import "material-icons/iconfont/material-icons.css";
-import "normalize.css";
 import "./index.css";
 
 ReactDOM.render(
