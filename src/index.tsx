@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
+
+import "materialize-css/dist/css/materialize.min.css";
+import "material-icons/iconfont/material-icons.css";
+import "normalize.css";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
