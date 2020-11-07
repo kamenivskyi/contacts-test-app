@@ -5,12 +5,17 @@ interface IListItems {
   items: IItem[];
 }
 
-const ListItems: React.FC<IListItems> = (props) => {
+const ListItems = ({ items }: IListItems) => {
   return (
     <div>
-      {props.items?.map((item: IItem, index) => {
+      {items?.map(({ email, name }: IItem, index) => {
         // console.log(item)
-        return index < 10 ? <div>{item.email}</div> : null;
+        return index < 10 ? (
+          <div key={email}>
+            {email}
+            <p>{name?.first}</p>
+          </div>
+        ) : null;
       })}
     </div>
   );
