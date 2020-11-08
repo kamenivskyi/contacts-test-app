@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
+import moment from "moment";
+
 import { IItem } from "../../interfaces";
 
 interface IListItems {
@@ -6,6 +8,21 @@ interface IListItems {
 }
 
 const TableListItems = ({ items }: IListItems) => {
+  const fullNameRef: any = useRef();
+  const phoneRef: any = useRef();
+  const emailRef: any = useRef();
+
+  const handleCopyToClipboard = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    fullNameRef.current.select();
+    document.execCommand("copy");
+
+    e.currentTarget.focus();
+    // setCopySuccess('Copied!');
+    // console.log(e.currentTarget.textContent);
+    // console.log(fullNameRef.current!);
+  };
+
   return (
     <table className="striped responsive-table">
       <thead>
@@ -33,25 +50,29 @@ const TableListItems = ({ items }: IListItems) => {
 
           console.log(item);
 
+          const formattedDate = moment(date).format(
+            "dddd, M/D/YYYY, h:mm:ss A"
+          );
+
           return index < 10 ? (
             <tr key={email}>
               <td>
                 <img src={thumbnail} className="circle" alt="" />
               </td>
               <td>
-                <a href="">
+                <a href="" onClick={handleCopyToClipboard} ref={fullNameRef}>
                   {name?.title}.{name?.first} {name?.last}
                 </a>
               </td>
-              <td>{date}</td>
+              <td>{formattedDate}</td>
               <td>
-                <a href="">
+                <a href="" ref={emailRef}>
                   <i className="tiny material-icons">content_copy</i>
                   {email}
                 </a>
               </td>
               <td>
-                <a href="">
+                <a href="" ref={phoneRef}>
                   <i className="tiny material-icons">content_copy</i>
                   {phone}
                 </a>
