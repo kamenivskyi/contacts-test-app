@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import Header from "../Header/Header";
 import FiltersForm from "../FiltersForm/FiltersForm";
 import TableListItems from "../TableListItems/TableListItems";
 import Spinner from "../Spinner/Spinner";
-
+import TiledList from "../TiledList";
 import { useContacts } from "../../hooks/useContacts";
 
 import "./Contacts.css";
 
 const Contacts = () => {
   const { status, data } = useContacts();
+  const [gridView, setGridView] = useState("table");
 
-  console.log(status);
+  useEffect(() => {
+    if (window.localStorage.getItem("gridView")) {
+      const saved = JSON.parse(
+        window.localStorage.getItem("gridView") || "table"
+      );
+
+      setGridView(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("gridView", JSON.stringify(gridView));
+  }, [gridView]);
 
   const handleFetchingStatus = (status: string | any) => {
     const matchStatus: any = {
@@ -25,13 +39,13 @@ const Contacts = () => {
 
   return (
     <section className="contacts">
-      <Header />
+      <Header setGridView={setGridView} gridView={gridView} />
       <main>
         <FiltersForm />
-
         {handleFetchingStatus(status)}
 
-        <TableListItems items={data} />
+        {gridView === "table" && <TableListItems items={data} />}
+        {gridView === "tiled" && <TiledList items={data} />}
       </main>
       <footer>Footer</footer>
     </section>

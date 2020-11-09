@@ -45,10 +45,10 @@ const TableListItems = ({ items }: IListItems) => {
             nat,
             location,
             picture: { thumbnail },
-            dob: { date },
+            dob: { date, age },
           } = item;
 
-          console.log(item);
+          // console.log(item)
 
           const formattedDate = moment(date).format(
             "dddd, M/D/YYYY, h:mm:ss A"
@@ -64,7 +64,11 @@ const TableListItems = ({ items }: IListItems) => {
                   {name?.title}.{name?.first} {name?.last}
                 </a>
               </td>
-              <td>{formattedDate}</td>
+              <td>
+                {formattedDate}
+                <br />
+                {age} years
+              </td>
               <td>
                 <a href="" ref={emailRef}>
                   <i className="tiny material-icons">content_copy</i>

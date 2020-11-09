@@ -1,0 +1,19 @@
+.App .btn,
+.App .btn-small {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.App .btn:hover,
+.App .btn-small:hover {
+  background-color: #c2c2c2;
+}
+
+.App .btn:focus,
+.App .btn-small:focus {
+  background-color: #cccccc;
+}
+.App .btn-small.active {
+  background-color: #222222;
+  color: #ffffff;
+}

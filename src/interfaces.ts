@@ -4,7 +4,8 @@ export interface IItem {
   phone: string;
   nat: string;
   id: object;
-  picture: { thumbnail: string };
+  login: { uuid: string };
+  picture: { thumbnail: string; medium: string; large: string };
   location: {
     city: string;
     country: string;

@@ -1,5 +1,6 @@
 class Api {
-  private baseUrl: string = "https://randomuser.me/api";
+  private baseUrl: string =
+    "http://cors-anywhere.herokuapp.com/https://randomuser.me/api";
 
   async get(url: string) {
     try {

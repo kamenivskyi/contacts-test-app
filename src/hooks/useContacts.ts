@@ -9,15 +9,21 @@ export const useContacts = () => {
   useEffect(() => {
     setStatus("pending");
 
-    api
-      .get("/?results=200")
-      .then((res) => {
-        setData(res.results);
+    const fetchContacts = async () => {
+      try {
+        const { results, error } = await api.get("/?results=200");
+        if (error) {
+          setStatus("failed");
+        }
+
+        setData(results);
         setStatus("success");
-      })
-      .catch((err) => {
+      } catch (error) {
         setStatus("failed");
-      });
+      }
+    };
+
+    fetchContacts();
   }, []);
 
   return { data, status };

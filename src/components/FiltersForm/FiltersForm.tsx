@@ -15,12 +15,10 @@ const FiltersForm = (props: Props) => {
       <div className="col s7">
         <div className="row">
           <select className="browser-default col s3" defaultValue="Gender">
-            <option selected disabled>
-              Gender
-            </option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <option disabled>Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">All</option>
           </select>
           <input
             className="validate col s5"
