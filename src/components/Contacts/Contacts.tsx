@@ -5,16 +5,13 @@ import FiltersForm from "../FiltersForm/FiltersForm";
 import TableListItems from "../TableListItems/TableListItems";
 import Spinner from "../Spinner/Spinner";
 import TiledList from "../TiledList";
-import { useContacts, useGridView } from "../../hooks";
+import { useContacts, useLocalStorage } from "../../hooks";
 
 import "./Contacts.css";
 
 const Contacts = () => {
   const { status, data } = useContacts();
-  const [gridView, setGridView] = useGridView({
-    key: "gridView",
-    initialValue: "table",
-  });
+  const [gridView, setGridView] = useLocalStorage("gridView", "table");
 
   const handleFetchingStatus = (status: string | any) => {
     const matchStatus: any = {

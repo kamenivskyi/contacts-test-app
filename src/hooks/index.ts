@@ -1,4 +1,4 @@
 import { useContacts } from "./useContacts";
-import { useGridView } from "./useGridView";
+import { useLocalStorage } from "./useLocalStorage";
 
-export { useGridView, useContacts };
+export { useContacts, useLocalStorage };
