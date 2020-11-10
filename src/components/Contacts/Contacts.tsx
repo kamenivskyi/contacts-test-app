@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Header from "../Header/Header";
 import FiltersForm from "../FiltersForm/FiltersForm";
 import TableListItems from "../TableListItems/TableListItems";
 import Spinner from "../Spinner/Spinner";
 import TiledList from "../TiledList";
-import { useContacts } from "../../hooks/useContacts";
+import { useContacts, useGridView } from "../../hooks";
 
 import "./Contacts.css";
 
 const Contacts = () => {
   const { status, data } = useContacts();
-  const [gridView, setGridView] = useState("table");
-
-  useEffect(() => {
-    if (window.localStorage.getItem("gridView")) {
-      const saved = JSON.parse(
-        window.localStorage.getItem("gridView") || "table"
-      );
-
-      setGridView(saved);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("gridView", JSON.stringify(gridView));
-  }, [gridView]);
+  const [gridView, setGridView] = useGridView({
+    key: "gridView",
+    initialValue: "table",
+  });
 
   const handleFetchingStatus = (status: string | any) => {
     const matchStatus: any = {

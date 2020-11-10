@@ -9,6 +9,11 @@ interface HeaderProps {
 const Header = ({ setGridView, gridView }: HeaderProps) => {
   const onSetTableView = (value: string) => () => setGridView(value);
 
+  const getClasses = (value: string) =>
+    clsx("btn-small", {
+      active: gridView === value,
+    });
+
   return (
     <header className="header">
       <div className="row valign-wrapper">
@@ -23,9 +28,7 @@ const Header = ({ setGridView, gridView }: HeaderProps) => {
           </li>
           <li>
             <button
-              className={clsx("btn-small", {
-                active: gridView === "table",
-              })}
+              className={getClasses("table")}
               onClick={onSetTableView("table")}
             >
               <i className="material-icons">format_list_bulleted</i>
@@ -33,9 +36,7 @@ const Header = ({ setGridView, gridView }: HeaderProps) => {
           </li>
           <li>
             <button
-              className={clsx("btn-small", {
-                active: gridView === "tiled",
-              })}
+              className={getClasses("tiled")}
               onClick={onSetTableView("tiled")}
             >
               <i className="material-icons">view_module</i>

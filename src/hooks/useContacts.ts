@@ -4,7 +4,7 @@ import { IItem } from "../interfaces";
 
 export const useContacts = () => {
   const [data, setData] = useState<IItem[]>([]);
-  const [status, setStatus] = useState<String>("idle");
+  const [status, setStatus] = useState<string>("idle");
 
   useEffect(() => {
     setStatus("pending");
